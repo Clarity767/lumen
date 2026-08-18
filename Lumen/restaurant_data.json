@@ -1,0 +1,861 @@
+[
+{
+  "model": "restaurant.profile",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "avatar": "avatars/Без_названия.png",
+    "phone": "+380964819693",
+    "bio": "Гліб",
+    "created_at": "2026-08-09T21:50:22.755Z"
+  }
+},
+{
+  "model": "restaurant.profile",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "avatar": "",
+    "phone": "",
+    "bio": "",
+    "created_at": "2026-08-11T17:50:05.206Z"
+  }
+},
+{
+  "model": "restaurant.category",
+  "pk": 1,
+  "fields": {
+    "name": "У вікна",
+    "slug": "window",
+    "type": "table"
+  }
+},
+{
+  "model": "restaurant.category",
+  "pk": 2,
+  "fields": {
+    "name": "VIP",
+    "slug": "vip",
+    "type": "table"
+  }
+},
+{
+  "model": "restaurant.category",
+  "pk": 3,
+  "fields": {
+    "name": "Тераса",
+    "slug": "terrace",
+    "type": "table"
+  }
+},
+{
+  "model": "restaurant.category",
+  "pk": 4,
+  "fields": {
+    "name": "Супи",
+    "slug": "soups",
+    "type": "dish"
+  }
+},
+{
+  "model": "restaurant.category",
+  "pk": 5,
+  "fields": {
+    "name": "Основні страви",
+    "slug": "main",
+    "type": "dish"
+  }
+},
+{
+  "model": "restaurant.category",
+  "pk": 6,
+  "fields": {
+    "name": "Десерти",
+    "slug": "desserts",
+    "type": "dish"
+  }
+},
+{
+  "model": "restaurant.category",
+  "pk": 7,
+  "fields": {
+    "name": "Напої",
+    "slug": "drinks",
+    "type": "dish"
+  }
+},
+{
+  "model": "restaurant.table",
+  "pk": 1,
+  "fields": {
+    "title": "Столик №1",
+    "description": "Затишний столик біля вікна з видом на вулицю.",
+    "price": "150.00",
+    "image": "",
+    "category": 1,
+    "seats": 2,
+    "is_available": true
+  }
+},
+{
+  "model": "restaurant.table",
+  "pk": 2,
+  "fields": {
+    "title": "Столик №2",
+    "description": "Просторий столик для компанії до 4 осіб.",
+    "price": "200.00",
+    "image": "",
+    "category": 1,
+    "seats": 4,
+    "is_available": true
+  }
+},
+{
+  "model": "restaurant.table",
+  "pk": 3,
+  "fields": {
+    "title": "VIP-кабінет №1",
+    "description": "Приватний кабінет з окремим входом та обслуговуванням.",
+    "price": "500.00",
+    "image": "",
+    "category": 2,
+    "seats": 6,
+    "is_available": true
+  }
+},
+{
+  "model": "restaurant.table",
+  "pk": 4,
+  "fields": {
+    "title": "VIP-кабінет №2",
+    "description": "Розкішний кабінет для особливих подій.",
+    "price": "600.00",
+    "image": "",
+    "category": 2,
+    "seats": 8,
+    "is_available": true
+  }
+},
+{
+  "model": "restaurant.table",
+  "pk": 5,
+  "fields": {
+    "title": "Тераса №1",
+    "description": "Столик на відкритій терасі з видом на сад.",
+    "price": "180.00",
+    "image": "",
+    "category": 3,
+    "seats": 2,
+    "is_available": true
+  }
+},
+{
+  "model": "restaurant.table",
+  "pk": 6,
+  "fields": {
+    "title": "Тераса №2",
+    "description": "Великий стіл на терасі для компанії друзів.",
+    "price": "250.00",
+    "image": "",
+    "category": 3,
+    "seats": 6,
+    "is_available": true
+  }
+},
+{
+  "model": "restaurant.dish",
+  "pk": 1,
+  "fields": {
+    "name": "Борщ український",
+    "description": "Класичний борщ з м'ясом та сметаною.",
+    "price": "95.00",
+    "photo": "dishes/images.jpg",
+    "category": 4,
+    "is_available": true
+  }
+},
+{
+  "model": "restaurant.dish",
+  "pk": 2,
+  "fields": {
+    "name": "Крем-суп з грибів",
+    "description": "Ніжний суп-пюре з лісових грибів.",
+    "price": "85.00",
+    "photo": "dishes/Без_названия_bNtQeF5.jpg",
+    "category": 4,
+    "is_available": true
+  }
+},
+{
+  "model": "restaurant.dish",
+  "pk": 3,
+  "fields": {
+    "name": "Стейк з лосося",
+    "description": "Стейк на грилі з овочами.",
+    "price": "320.00",
+    "photo": "dishes/images_1.jpg",
+    "category": 5,
+    "is_available": true
+  }
+},
+{
+  "model": "restaurant.dish",
+  "pk": 4,
+  "fields": {
+    "name": "Паста Карбонара",
+    "description": "Класична італійська паста з беконом.",
+    "price": "210.00",
+    "photo": "dishes/images_2.jpg",
+    "category": 5,
+    "is_available": true
+  }
+},
+{
+  "model": "restaurant.dish",
+  "pk": 5,
+  "fields": {
+    "name": "Куряче філе гриль",
+    "description": "Соковите куряче філе з гарніром.",
+    "price": "180.00",
+    "photo": "dishes/images_3.jpg",
+    "category": 5,
+    "is_available": true
+  }
+},
+{
+  "model": "restaurant.dish",
+  "pk": 6,
+  "fields": {
+    "name": "Тірамісу",
+    "description": "Класичний італійський десерт.",
+    "price": "110.00",
+    "photo": "dishes/images_4.jpg",
+    "category": 6,
+    "is_available": true
+  }
+},
+{
+  "model": "restaurant.dish",
+  "pk": 7,
+  "fields": {
+    "name": "Чізкейк Нью-Йорк",
+    "description": "Ніжний чізкейк з ягідним соусом.",
+    "price": "120.00",
+    "photo": "dishes/images_5.jpg",
+    "category": 6,
+    "is_available": true
+  }
+},
+{
+  "model": "restaurant.dish",
+  "pk": 8,
+  "fields": {
+    "name": "Лимонад домашній",
+    "description": "Освіжаючий лимонад з м'ятою.",
+    "price": "60.00",
+    "photo": "dishes/images_6.jpg",
+    "category": 7,
+    "is_available": true
+  }
+},
+{
+  "model": "restaurant.dish",
+  "pk": 9,
+  "fields": {
+    "name": "Кава American",
+    "description": "Класична чорна кава.",
+    "price": "45.00",
+    "photo": "dishes/images_7.jpg",
+    "category": 7,
+    "is_available": true
+  }
+},
+{
+  "model": "restaurant.dish",
+  "pk": 10,
+  "fields": {
+    "name": "Свіжовичавлений сік",
+    "description": "Апельсиновий або яблучний сік.",
+    "price": "70.00",
+    "photo": "dishes/images_8.jpg",
+    "category": 7,
+    "is_available": true
+  }
+},
+{
+  "model": "restaurant.booking",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "table": 5,
+    "booking_date": "2026-08-09",
+    "booking_time": "01:05:00",
+    "duration_minutes": 120,
+    "promo_code": null,
+    "promo_discount_applied": "0.00",
+    "status": "paid",
+    "total_price": "1520.00"
+  }
+},
+{
+  "model": "restaurant.booking",
+  "pk": 2,
+  "fields": {
+    "user": 1,
+    "table": 1,
+    "booking_date": "2026-11-09",
+    "booking_time": "19:00:00",
+    "duration_minutes": 120,
+    "promo_code": null,
+    "promo_discount_applied": "0.00",
+    "status": "paid",
+    "total_price": "1100.00"
+  }
+},
+{
+  "model": "restaurant.booking",
+  "pk": 3,
+  "fields": {
+    "user": 1,
+    "table": 2,
+    "booking_date": "2026-08-19",
+    "booking_time": "19:05:00",
+    "duration_minutes": 120,
+    "promo_code": null,
+    "promo_discount_applied": "0.00",
+    "status": "paid",
+    "total_price": "200.00"
+  }
+},
+{
+  "model": "restaurant.booking",
+  "pk": 4,
+  "fields": {
+    "user": 1,
+    "table": 1,
+    "booking_date": "2026-11-25",
+    "booking_time": "19:00:00",
+    "duration_minutes": 120,
+    "promo_code": null,
+    "promo_discount_applied": "0.00",
+    "status": "paid",
+    "total_price": "150.00"
+  }
+},
+{
+  "model": "restaurant.booking",
+  "pk": 5,
+  "fields": {
+    "user": 1,
+    "table": 2,
+    "booking_date": "2026-08-09",
+    "booking_time": "22:26:39",
+    "duration_minutes": 120,
+    "promo_code": null,
+    "promo_discount_applied": "0.00",
+    "status": "paid",
+    "total_price": "200.00"
+  }
+},
+{
+  "model": "restaurant.booking",
+  "pk": 6,
+  "fields": {
+    "user": 1,
+    "table": 3,
+    "booking_date": "2026-08-10",
+    "booking_time": "00:30:00",
+    "duration_minutes": 120,
+    "promo_code": null,
+    "promo_discount_applied": "0.00",
+    "status": "cancelled",
+    "total_price": "500.00"
+  }
+},
+{
+  "model": "restaurant.booking",
+  "pk": 7,
+  "fields": {
+    "user": 1,
+    "table": 2,
+    "booking_date": "2026-08-11",
+    "booking_time": "18:55:00",
+    "duration_minutes": 120,
+    "promo_code": null,
+    "promo_discount_applied": "0.00",
+    "status": "cancelled",
+    "total_price": "1425.00"
+  }
+},
+{
+  "model": "restaurant.booking",
+  "pk": 8,
+  "fields": {
+    "user": 2,
+    "table": 1,
+    "booking_date": "2026-08-14",
+    "booking_time": "19:30:00",
+    "duration_minutes": 120,
+    "promo_code": 3,
+    "promo_discount_applied": "30.00",
+    "status": "paid",
+    "total_price": "1015.00"
+  }
+},
+{
+  "model": "restaurant.booking",
+  "pk": 9,
+  "fields": {
+    "user": 2,
+    "table": 3,
+    "booking_date": "2026-08-14",
+    "booking_time": "21:00:00",
+    "duration_minutes": 120,
+    "promo_code": 12,
+    "promo_discount_applied": "30.00",
+    "status": "paid",
+    "total_price": "610.00"
+  }
+},
+{
+  "model": "restaurant.booking",
+  "pk": 10,
+  "fields": {
+    "user": 2,
+    "table": 2,
+    "booking_date": "2026-08-18",
+    "booking_time": "19:00:00",
+    "duration_minutes": 120,
+    "promo_code": 13,
+    "promo_discount_applied": "30.00",
+    "status": "paid",
+    "total_price": "380.00"
+  }
+},
+{
+  "model": "restaurant.bookingitem",
+  "pk": 1,
+  "fields": {
+    "booking": 1,
+    "dish": 1,
+    "quantity": 4,
+    "price_at_order": "95.00"
+  }
+},
+{
+  "model": "restaurant.bookingitem",
+  "pk": 2,
+  "fields": {
+    "booking": 1,
+    "dish": 5,
+    "quantity": 4,
+    "price_at_order": "180.00"
+  }
+},
+{
+  "model": "restaurant.bookingitem",
+  "pk": 3,
+  "fields": {
+    "booking": 1,
+    "dish": 8,
+    "quantity": 4,
+    "price_at_order": "60.00"
+  }
+},
+{
+  "model": "restaurant.bookingitem",
+  "pk": 4,
+  "fields": {
+    "booking": 2,
+    "dish": 1,
+    "quantity": 10,
+    "price_at_order": "95.00"
+  }
+},
+{
+  "model": "restaurant.bookingitem",
+  "pk": 5,
+  "fields": {
+    "booking": 7,
+    "dish": 1,
+    "quantity": 1,
+    "price_at_order": "95.00"
+  }
+},
+{
+  "model": "restaurant.bookingitem",
+  "pk": 6,
+  "fields": {
+    "booking": 7,
+    "dish": 2,
+    "quantity": 2,
+    "price_at_order": "85.00"
+  }
+},
+{
+  "model": "restaurant.bookingitem",
+  "pk": 7,
+  "fields": {
+    "booking": 7,
+    "dish": 3,
+    "quantity": 3,
+    "price_at_order": "320.00"
+  }
+},
+{
+  "model": "restaurant.bookingitem",
+  "pk": 8,
+  "fields": {
+    "booking": 8,
+    "dish": 1,
+    "quantity": 5,
+    "price_at_order": "95.00"
+  }
+},
+{
+  "model": "restaurant.bookingitem",
+  "pk": 9,
+  "fields": {
+    "booking": 8,
+    "dish": 10,
+    "quantity": 6,
+    "price_at_order": "70.00"
+  }
+},
+{
+  "model": "restaurant.bookingitem",
+  "pk": 10,
+  "fields": {
+    "booking": 9,
+    "dish": 10,
+    "quantity": 2,
+    "price_at_order": "70.00"
+  }
+},
+{
+  "model": "restaurant.bookingitem",
+  "pk": 11,
+  "fields": {
+    "booking": 10,
+    "dish": 10,
+    "quantity": 3,
+    "price_at_order": "70.00"
+  }
+},
+{
+  "model": "restaurant.payment",
+  "pk": 1,
+  "fields": {
+    "booking": 2,
+    "amount": "1100.00",
+    "status": "success",
+    "transaction_id": "SIM-E39CD5F031FF",
+    "paid_at": "2026-08-08T21:09:51.843Z"
+  }
+},
+{
+  "model": "restaurant.payment",
+  "pk": 2,
+  "fields": {
+    "booking": 3,
+    "amount": "200.00",
+    "status": "success",
+    "transaction_id": "SIM-CAE4DA72A0B4",
+    "paid_at": "2026-08-08T21:35:43.079Z"
+  }
+},
+{
+  "model": "restaurant.payment",
+  "pk": 3,
+  "fields": {
+    "booking": 1,
+    "amount": "1520.00",
+    "status": "success",
+    "transaction_id": "SIM-4552FF1D84FF",
+    "paid_at": "2026-08-08T21:50:41.702Z"
+  }
+},
+{
+  "model": "restaurant.payment",
+  "pk": 4,
+  "fields": {
+    "booking": 4,
+    "amount": "150.00",
+    "status": "success",
+    "transaction_id": "SIM-AC11B59EE250",
+    "paid_at": "2026-08-08T21:50:47.112Z"
+  }
+},
+{
+  "model": "restaurant.payment",
+  "pk": 5,
+  "fields": {
+    "booking": 5,
+    "amount": "200.00",
+    "status": "success",
+    "transaction_id": "SIM-42200B21B9C2",
+    "paid_at": "2026-08-09T19:00:31.844Z"
+  }
+},
+{
+  "model": "restaurant.payment",
+  "pk": 6,
+  "fields": {
+    "booking": 8,
+    "amount": "1015.00",
+    "status": "success",
+    "transaction_id": "SIM-5478C76BF6CB",
+    "paid_at": "2026-08-14T16:24:41.128Z"
+  }
+},
+{
+  "model": "restaurant.payment",
+  "pk": 7,
+  "fields": {
+    "booking": 9,
+    "amount": "610.00",
+    "status": "success",
+    "transaction_id": "SIM-E7DE4C1DF059",
+    "paid_at": "2026-08-14T17:57:09.055Z"
+  }
+},
+{
+  "model": "restaurant.payment",
+  "pk": 8,
+  "fields": {
+    "booking": 10,
+    "amount": "380.00",
+    "status": "success",
+    "transaction_id": "SIM-2B820E88C4B2",
+    "paid_at": "2026-08-18T13:37:55.329Z"
+  }
+},
+{
+  "model": "restaurant.message",
+  "pk": 1,
+  "fields": {
+    "sender": 2,
+    "receiver": 1,
+    "text": "Коли вже буде нова страва",
+    "image": "",
+    "created_at": "2026-08-07T17:51:33.480Z",
+    "is_read": true
+  }
+},
+{
+  "model": "restaurant.message",
+  "pk": 2,
+  "fields": {
+    "sender": 1,
+    "receiver": 2,
+    "text": "Наступного тижня",
+    "image": "",
+    "created_at": "2026-08-07T17:52:21.899Z",
+    "is_read": true
+  }
+},
+{
+  "model": "restaurant.review",
+  "pk": 1,
+  "fields": {
+    "dish": 8,
+    "user": 1,
+    "rating": 5,
+    "text": "Дуже освіжаючий",
+    "created_at": "2026-08-11T17:15:51.311Z"
+  }
+},
+{
+  "model": "restaurant.review",
+  "pk": 2,
+  "fields": {
+    "dish": 1,
+    "user": 2,
+    "rating": 5,
+    "text": "qweyegti21tyq",
+    "created_at": "2026-08-11T17:49:32.622Z"
+  }
+},
+{
+  "model": "restaurant.gamepromocode",
+  "pk": 1,
+  "fields": {
+    "user": 2,
+    "code": "MUILXGLA",
+    "score": 130,
+    "reward_type": "drink",
+    "reward_description": "Знижка 50% на напій",
+    "discount_amount": "0.00",
+    "is_used": false,
+    "created_at": "2026-08-14T15:53:43.274Z"
+  }
+},
+{
+  "model": "restaurant.gamepromocode",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "code": "C16PNZQ2",
+    "score": 130,
+    "reward_type": "drink",
+    "reward_description": "Знижка 30 грн на напій",
+    "discount_amount": "30.00",
+    "is_used": false,
+    "created_at": "2026-08-14T16:13:08.015Z"
+  }
+},
+{
+  "model": "restaurant.gamepromocode",
+  "pk": 3,
+  "fields": {
+    "user": 2,
+    "code": "2Y1IYMIF",
+    "score": 138,
+    "reward_type": "drink",
+    "reward_description": "Знижка 30 грн на напій",
+    "discount_amount": "30.00",
+    "is_used": true,
+    "created_at": "2026-08-14T16:23:36.666Z"
+  }
+},
+{
+  "model": "restaurant.gamepromocode",
+  "pk": 4,
+  "fields": {
+    "user": 2,
+    "code": "1R0UHJV0",
+    "score": 130,
+    "reward_type": "drink",
+    "reward_description": "Знижка 30 грн на напій",
+    "discount_amount": "30.00",
+    "is_used": false,
+    "created_at": "2026-08-14T16:25:08.631Z"
+  }
+},
+{
+  "model": "restaurant.gamepromocode",
+  "pk": 5,
+  "fields": {
+    "user": 2,
+    "code": "DL8FGJFC",
+    "score": 153,
+    "reward_type": "drink",
+    "reward_description": "Безкоштовний напій (знижка 80 грн)",
+    "discount_amount": "80.00",
+    "is_used": false,
+    "created_at": "2026-08-14T16:31:21.611Z"
+  }
+},
+{
+  "model": "restaurant.gamepromocode",
+  "pk": 6,
+  "fields": {
+    "user": 2,
+    "code": "9QAD2XUP",
+    "score": 130,
+    "reward_type": "drink",
+    "reward_description": "Знижка 30 грн на напій",
+    "discount_amount": "30.00",
+    "is_used": false,
+    "created_at": "2026-08-14T16:58:03.819Z"
+  }
+},
+{
+  "model": "restaurant.gamepromocode",
+  "pk": 7,
+  "fields": {
+    "user": 2,
+    "code": "CKPH9OFY",
+    "score": 52,
+    "reward_type": "drink",
+    "reward_description": "Знижка 30 грн на напій",
+    "discount_amount": "30.00",
+    "is_used": false,
+    "created_at": "2026-08-14T17:06:30.377Z"
+  }
+},
+{
+  "model": "restaurant.gamepromocode",
+  "pk": 8,
+  "fields": {
+    "user": 2,
+    "code": "5K9C3Z7L",
+    "score": 153,
+    "reward_type": "drink",
+    "reward_description": "Безкоштовний напій (знижка 80 грн)",
+    "discount_amount": "80.00",
+    "is_used": false,
+    "created_at": "2026-08-14T17:09:31.145Z"
+  }
+},
+{
+  "model": "restaurant.gamepromocode",
+  "pk": 9,
+  "fields": {
+    "user": 2,
+    "code": "9J0NYJWW",
+    "score": 97,
+    "reward_type": "drink",
+    "reward_description": "Знижка 30 грн на напій",
+    "discount_amount": "30.00",
+    "is_used": false,
+    "created_at": "2026-08-14T17:13:18.889Z"
+  }
+},
+{
+  "model": "restaurant.gamepromocode",
+  "pk": 10,
+  "fields": {
+    "user": 2,
+    "code": "3PPOQWI3",
+    "score": 241,
+    "reward_type": "drink",
+    "reward_description": "Безкоштовний напій (знижка 80 грн)",
+    "discount_amount": "80.00",
+    "is_used": false,
+    "created_at": "2026-08-14T17:18:02.892Z"
+  }
+},
+{
+  "model": "restaurant.gamepromocode",
+  "pk": 11,
+  "fields": {
+    "user": 2,
+    "code": "JDKATNQC",
+    "score": 146,
+    "reward_type": "drink",
+    "reward_description": "Знижка 30 грн на напій",
+    "discount_amount": "30.00",
+    "is_used": false,
+    "created_at": "2026-08-14T17:19:46.460Z"
+  }
+},
+{
+  "model": "restaurant.gamepromocode",
+  "pk": 12,
+  "fields": {
+    "user": 2,
+    "code": "EW2B67Y6",
+    "score": 138,
+    "reward_type": "drink",
+    "reward_description": "Знижка 30 грн на напій",
+    "discount_amount": "30.00",
+    "is_used": true,
+    "created_at": "2026-08-14T17:55:19.330Z"
+  }
+},
+{
+  "model": "restaurant.gamepromocode",
+  "pk": 13,
+  "fields": {
+    "user": 2,
+    "code": "FCIXT604",
+    "score": 52,
+    "reward_type": "drink",
+    "reward_description": "Знижка 30 грн на напій",
+    "discount_amount": "30.00",
+    "is_used": true,
+    "created_at": "2026-08-18T13:37:19.844Z"
+  }
+}
+]

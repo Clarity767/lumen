@@ -1,5 +1,3 @@
-
-
 from pathlib import Path
 import environ
 import os
@@ -12,11 +10,11 @@ environ.Env.read_env(BASE_DIR / '.env')
 env = environ.Env(
     DEBUG=(bool, False)
 )
+
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
-
 
 
 INSTALLED_APPS = [
@@ -25,14 +23,18 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',
     'django.contrib.staticfiles',
+
+    'cloudinary_storage',
     'cloudinary',
-    'restaurant'
+
+    'restaurant',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -41,7 +43,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 ROOT_URLCONF = 'Lumen.urls'
+
 
 TEMPLATES = [
     {
@@ -60,8 +64,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Lumen.wsgi.application'
 
+WSGI_APPLICATION = 'Lumen.wsgi.application'
 
 
 DATABASES = {
@@ -77,8 +81,16 @@ CLOUDINARY_STORAGE = {
     'API_KEY': env('CLOUDINARY_API_KEY'),
     'API_SECRET': env('CLOUDINARY_API_SECRET'),
 }
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+
+STORAGES = {
+    'default': {
+        'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+}
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -97,42 +109,41 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
-
 USE_TZ = True
 
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
+
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = [BASE_DIR / 'restaurant' / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 USE_L10N = True
+
 DATE_INPUT_FORMATS = ['%Y-%m-%d']
 TIME_INPUT_FORMATS = ['%H:%M']
-
-
 
 
 if 'RENDER' in os.environ:
     DEBUG = False
 
     RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+
     if RENDER_EXTERNAL_HOSTNAME:
         ALLOWED_HOSTS = [RENDER_EXTERNAL_HOSTNAME]
-
-    CSRF_TRUSTED_ORIGINS = [f'https://{RENDER_EXTERNAL_HOSTNAME}']
-
+        CSRF_TRUSTED_ORIGINS = [
+            f'https://{RENDER_EXTERNAL_HOSTNAME}'
+        ]
 
     DATABASES = {
         'default': dj_database_url.config(
@@ -140,14 +151,3 @@ if 'RENDER' in os.environ:
             conn_max_age=600,
         )
     }
-
-    MIDDLEWARE.insert(
-        MIDDLEWARE.index('django.middleware.security.SecurityMiddleware') + 1,
-        'whitenoise.middleware.WhiteNoiseMiddleware',
-    )
-
-    STATIC_ROOT = BASE_DIR / 'staticfiles'
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-    MEDIA_ROOT = BASE_DIR / 'media'
-    MEDIA_URL = '/media/'

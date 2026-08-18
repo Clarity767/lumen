@@ -14,7 +14,7 @@ env = environ.Env(
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 INSTALLED_APPS = [
@@ -116,9 +116,10 @@ TIME_ZONE = 'Europe/Kiev'
 USE_I18N = True
 USE_TZ = True
 
-
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
 
 
 STATIC_URL = '/static/'

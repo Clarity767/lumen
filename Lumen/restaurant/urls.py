@@ -29,5 +29,5 @@ urlpatterns = [
     path('search/', views.search_view, name='search'),
     path('about/', views.about_view, name='about'),
     path('game/', views.game_view, name='game'),
-path('game/finish/', views.game_finish_view, name='game_finish'),
+    path('game/finish/', views.game_finish_view, name='game_finish'),
 ]

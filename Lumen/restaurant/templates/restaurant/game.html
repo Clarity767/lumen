@@ -1,0 +1,49 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+{% block title %}Гра{% endblock %}
+{% block extra_css %}
+<link href="{% static 'restaurant/css/game.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="text-center">
+    <h2>Пробіжи якнайдалі та отримай промокод!</h2>
+    <p class="text-muted">Тисни Пробіл або клікни по грі, щоб стрибнути</p>
+
+    <div class="lm-game-wrapper">
+        <canvas id="gameCanvas" width="800" height="300"></canvas>
+        <div id="gameOverlay" class="lm-game-overlay">
+            <button id="startBtn" class="btn btn-primary btn-lg">Почати гру</button>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <span class="fs-5">Рахунок: <strong id="scoreDisplay">0</strong></span>
+    </div>
+
+    <div id="resultBlock" class="mt-4" style="display:none;">
+        <div id="promoResult" class="alert alert-success" style="display:none;"></div>
+        <div id="noPromoResult" class="alert alert-secondary" style="display:none;">
+            Цього разу без призу. Спробуй ще раз, набери більше очок!
+        </div>
+        <button id="retryBtn" class="btn btn-outline-primary">Спробувати ще раз</button>
+    </div>
+
+    <div class="mt-4 text-start mx-auto" style="max-width: 400px;">
+        <h5 class="mb-3">Пороги нагород:</h5>
+        <div class="rewards-table">
+            {% for threshold, reward_type, description, discount in thresholds %}
+            <div class="reward-row">
+                <span class="reward-threshold">{{ threshold }}+ очок</span>
+                <span class="reward-desc">{{ description }}</span>
+                <span class="reward-cost">(−{{ discount }} грн)</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        window.GAME_FINISH_URL = "{% url 'game_finish' %}";
+        window.CSRF_TOKEN = "{{ csrf_token }}";
+    </script>
+    <script src="{% static 'restaurant/js/game.js' %}"></script>
+    {% endblock %}

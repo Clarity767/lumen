@@ -1,0 +1,38 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+{% block extra_css %}
+<link href="{% static 'restaurant/css/client_chat.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Чат з адміністрацією</h2>
+    <div id="chat-box"
+         class="border rounded p-3 mb-3"
+         style="height: 400px; overflow-y: auto;"
+         data-poll-url="{% url 'client_chat_poll' %}">
+        {% for msg in chat_messages %}
+            <div class="mb-2 {% if msg.sender == request.user %}text-end{% endif %}">
+                <span class="badge {% if msg.sender == request.user %}bg-primary{% else %}bg-secondary{% endif %}">
+                    {{ msg.sender.username }}
+                </span>
+                <div>{{ msg.text }}</div>
+                <small class="text-muted">{{ msg.created_at|date:"d.m H:i" }}</small>
+            </div>
+        {% empty %}
+            <p class="text-muted">Повідомлень поки немає. Напишіть нам, якщо є питання щодо бронювання.</p>
+        {% endfor %}
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="input-group">
+            <input type="text" name="text" class="form-control" placeholder="Ваше повідомлення..." required>
+            <button type="submit" class="btn btn-primary">Надіслати</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'restaurant/js/chat.js' %}"></script>
+{% endblock %}

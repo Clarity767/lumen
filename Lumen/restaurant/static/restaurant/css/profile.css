@@ -1,0 +1,26 @@
+/* profile.css — for profile.html */
+
+.card {
+    background: var(--lm-bg-card);
+    border: 1px solid var(--lm-line);
+    border-radius: var(--lm-radius);
+}
+.card-title { font-family: var(--lm-font-display); }
+.card-text { color: var(--lm-muted); }
+
+.table { color: var(--lm-ivory); border-color: var(--lm-line); }
+.table thead th {
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lm-gold);
+    border-bottom: 1px solid var(--lm-line-strong);
+    font-weight: 500;
+    background: transparent;
+}
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    background: rgba(201, 162, 93, 0.03);
+    color: var(--lm-ivory);
+    box-shadow: none;
+}
+.table td, .table th { border-color: var(--lm-line); vertical-align: middle; }

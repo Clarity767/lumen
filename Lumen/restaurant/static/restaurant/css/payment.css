@@ -1,0 +1,27 @@
+
+.card.p-4 {
+    background: var(--lm-bg-card);
+    border: 1px solid var(--lm-line);
+    border-radius: var(--lm-radius);
+}
+
+.card.p-4 p strong {
+    color: var(--lm-ivory);
+    font-weight: 500;
+}
+
+.form-control {
+    background: transparent !important;
+    border: none;
+    border-bottom: 1px solid var(--lm-line-strong);
+    border-radius: 0 !important;
+    color: var(--lm-ivory) !important;
+}
+.form-control:focus {
+    box-shadow: none;
+    border-bottom-color: var(--lm-gold);
+    background: rgba(201, 162, 93, 0.04) !important;
+}
+.form-control::placeholder { color: var(--lm-muted-dim); }
+
+.text-muted.small { font-size: 0.78rem; }

@@ -1,0 +1,13 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+{% block extra_css %}
+<link href="{% static 'restaurant/css/payment_success.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="container mt-4 text-center">
+    <h2 class="text-success">✅ Оплата успішна</h2>
+    <p>Ваше бронювання столика «{{ booking.table.title }}» на {{ booking.booking_date }} оплачено.</p>
+    <p>ID транзакції: <strong>{{ booking.payment.transaction_id }}</strong></p>
+    <a href="{% url 'profile' %}" class="btn btn-primary mt-3">До особистого кабінету</a>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+{% load chat_extras %}
+{% block extra_css %}
+<link href="{% static 'restaurant/css/admin_chat_list.css' %}" rel="stylesheet">
+{% endblock %}
+{% block title %}Чати з клієнтами{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Чати з клієнтами</h2>
+    <ul class="list-group">
+        {% for client in clients %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{% url 'admin_chat_thread' client.id %}">{{ client.username }}</a>
+                {% if unread_counts|get_item:client.id %}
+                    <span class="badge bg-danger">{{ unread_counts|get_item:client.id }}</span>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li class="list-group-item text-muted">Поки немає звернень від клієнтів.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

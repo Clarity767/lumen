@@ -1,0 +1,30 @@
+
+#chat-box {
+    background: var(--lm-bg-elevated) !important;
+    border: 1px solid var(--lm-line) !important;
+    border-radius: var(--lm-radius);
+}
+#chat-box .badge { border-radius: 20px; font-size: 0.6rem; }
+#chat-box div div {
+    display: inline-block;
+    background: rgba(201, 162, 93, 0.06);
+    border: 1px solid var(--lm-line);
+    border-radius: 10px;
+    padding: 0.5rem 0.85rem;
+    margin-top: 0.3rem;
+    font-size: 0.88rem;
+    color: var(--lm-ivory);
+    max-width: 80%;
+}
+#chat-box .text-end div div {
+    background: rgba(201, 162, 93, 0.14);
+    border-color: var(--lm-line-strong);
+}
+
+.input-group .form-control {
+    background: transparent !important;
+    border: 1px solid var(--lm-line-strong);
+    color: var(--lm-ivory) !important;
+    padding: 0.6rem 0.9rem;
+}
+.input-group .form-control:focus { box-shadow: none; border-color: var(--lm-gold); }

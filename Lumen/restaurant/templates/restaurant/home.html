@@ -1,0 +1,160 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+{% block extra_css %}
+<link href="{% static 'restaurant/css/home.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+    <div id="lmPreloader">
+        <div class="lm-preloader-brand">Lumen</div>
+    </div>
+
+    <section class="lm-hero">
+        <div class="lm-hero-media lm-hero-media--img" style="background-image:url('{% static 'restaurant/img/hero.jpg' %}');"></div> 
+     
+        <div class="lm-hero-overlay"></div>
+
+        <div class="lm-hero-bokeh" aria-hidden="true">
+            <span class="lm-bokeh" style="--x:8%;  --size:18px; --dur:14s; --delay:0s;   --drift:22px;"></span>
+            <span class="lm-bokeh" style="--x:18%; --size:9px;  --dur:11s; --delay:2s;   --drift:-16px;"></span>
+            <span class="lm-bokeh" style="--x:27%; --size:24px; --dur:17s; --delay:1s;   --drift:18px;"></span>
+            <span class="lm-bokeh" style="--x:38%; --size:12px; --dur:13s; --delay:4s;   --drift:-24px;"></span>
+            <span class="lm-bokeh" style="--x:49%; --size:30px; --dur:19s; --delay:0.5s; --drift:14px;"></span>
+            <span class="lm-bokeh" style="--x:58%; --size:14px; --dur:12s; --delay:3s;   --drift:-20px;"></span>
+            <span class="lm-bokeh" style="--x:67%; --size:20px; --dur:16s; --delay:5s;   --drift:26px;"></span>
+            <span class="lm-bokeh" style="--x:76%; --size:10px; --dur:10s; --delay:1.5s; --drift:-18px;"></span>
+            <span class="lm-bokeh" style="--x:85%; --size:26px; --dur:18s; --delay:2.5s; --drift:20px;"></span>
+            <span class="lm-bokeh" style="--x:92%; --size:15px; --dur:15s; --delay:6s;   --drift:-14px;"></span>
+            <span class="lm-bokeh" style="--x:14%; --size:22px; --dur:20s; --delay:7s;   --drift:16px;"></span>
+            <span class="lm-bokeh" style="--x:72%; --size:16px; --dur:14.5s; --delay:8s; --drift:-22px;"></span>
+        </div>
+     
+        <div class="lm-hero-content">
+            <h1 class="lm-hero-title">
+                <span class="lm-hero-line-wrap"><span class="lm-hero-line" style="--d:0.1s">Ласкаво просимо до</span></span>
+                <span class="lm-hero-line-wrap"><span class="lm-hero-line lm-hero-brand" style="--d:0.35s">Lumen</span></span>
+            </h1>
+            <p class="lm-hero-sub" style="--d:0.65s">Бронюйте столики та обирайте страви з нашого меню онлайн.</p>
+            <a href="{% url 'table_list' %}" class="btn btn-primary btn-lg lm-hero-cta" style="--d:0.85s">Переглянути столики</a>
+        </div>
+     
+        <div class="lm-hero-scroll" style="--d:1.1s">
+            <span class="lm-hero-scroll-dot"></span>
+            <span class="lm-hero-scroll-label">Гортайте</span>
+        </div>
+    </section>
+
+    <div class="row g-4 my-4">
+        <div class="col-md-4 lm-animate">
+            <div class="card h-100 text-center lm-feature">
+                <div class="card-body">
+                    <div class="lm-feature-num">01</div>
+                    <h5 class="card-title">Бронювання онлайн</h5>
+                    <p class="card-text">Оберіть столик, дату й час за пару хвилин — без дзвінків та очікування.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 lm-animate">
+            <div class="card h-100 text-center lm-feature">
+                <div class="card-body">
+                    <div class="lm-feature-num">02</div>
+                    <h5 class="card-title">Меню від шефа</h5>
+                    <p class="card-text">Додайте улюблені страви до бронювання ще до приходу в ресторан.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 lm-animate">
+            <div class="card h-100 text-center lm-feature">
+                <div class="card-body">
+                    <div class="lm-feature-num">03</div>
+                    <h5 class="card-title">Підтримка у чаті</h5>
+                    <p class="card-text">Питання щодо бронювання чи столика — адміністрація на зв'язку в чаті.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row text-center lm-stats my-5 py-4">
+        <div class="col-6 col-md-3 lm-animate">
+            <div class="lm-stat-number">15+</div>
+            <div class="lm-stat-label">Столиків у залі</div>
+        </div>
+        <div class="col-6 col-md-3 lm-animate">
+            <div class="lm-stat-number">30+</div>
+            <div class="lm-stat-label">Страв у меню</div>
+        </div>
+        <div class="col-6 col-md-3 lm-animate">
+            <div class="lm-stat-number">2 хв</div>
+            <div class="lm-stat-label">На бронювання</div>
+        </div>
+        <div class="col-6 col-md-3 lm-animate">
+            <div class="lm-stat-number">7/7</div>
+            <div class="lm-stat-label">Дні на тиждень</div>
+        </div>
+    </div>
+
+    <div class="row align-items-center g-5 my-5">
+        <div class="col-md-6 lm-animate">
+            <h2 class="mb-3">Кулінарна подорож</h2>
+            <p>У Lumen ми вважаємо, що вечеря — це занурення. Наше меню поєднує сезонні інгредієнти, вивірену техніку та часом перевірені традиції.</p>
+            <p>Кожен столик підбирається під атмосферу вашого вечора — від камерних куточків для двох до простору для великих компаній.</p>
+            <a href="{% url 'menu' %}" class="btn btn-outline-primary">Переглянути меню</a>
+        </div>
+        <div class="col-md-6 lm-animate">
+            <div class="card lm-seasonal-card">
+                <div class="card-body">
+                    <h3 class="mt-2">Сезонна подача</h3>
+                    <p class="card-text">Вишукані страви від наших шефів, оновлені відповідно до сезону та найкращих локальних продуктів.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lm-testimonials my-5 lm-animate">
+        <div class="text-center mb-4">
+            <h2 class="d-inline-block">Що кажуть гості</h2>
+        </div>
+        <div id="lmReviews" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="lm-review mx-auto">
+                        <div class="lm-review-stars">★★★★★</div>
+                        <p class="lm-review-text">«Забронювали столик за дві хвилини прямо з телефону, а адміністратор одразу підтвердив у чаті. Вечір вийшов бездоганний.»</p>
+                        <div class="lm-review-author">— Олена К.</div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="lm-review mx-auto">
+                        <div class="lm-review-stars">★★★★★</div>
+                        <p class="lm-review-text">«Дуже зручно додавати страви ще на етапі бронювання — коли прийшли, все вже чекало на столі.»</p>
+                        <div class="lm-review-author">— Максим Т.</div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="lm-review mx-auto">
+                        <div class="lm-review-stars">★★★★★</div>
+                        <p class="lm-review-text">«Атмосфера, подача, увага до деталей — Lumen тримає рівень з першого до останнього візиту.»</p>
+                        <div class="lm-review-author">— Ірина В.</div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#lmReviews" data-bs-slide="prev">
+                <span class="lm-carousel-arrow">&larr;</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#lmReviews" data-bs-slide="next">
+                <span class="lm-carousel-arrow">&rarr;</span>
+            </button>
+            <div class="carousel-indicators lm-carousel-dots">
+                <button type="button" data-bs-target="#lmReviews" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#lmReviews" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#lmReviews" data-bs-slide-to="2"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="lm-cta text-center py-5 my-5 lm-animate">
+        <h2 class="d-inline-block">Готові забронювати столик?</h2>
+        <p class="mb-4">Оберіть зручний столик і час — це займе не більше двох хвилин.</p>
+        <a href="{% url 'table_list' %}" class="btn btn-primary btn-lg">Перейти до столиків</a>
+    </div>
+{% endblock %}

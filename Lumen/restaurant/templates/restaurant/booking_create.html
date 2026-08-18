@@ -1,0 +1,68 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+{% block title %}Бронювання — {{ table.title }}{% endblock %}
+{% block extra_css %}
+<link href="{% static 'restaurant/css/booking_create.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <h2 class="mb-4">Бронювання столика "{{ table.title }}"</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <p>Ціна столика: <strong>{{ table.price }} грн</strong></p>
+            <p>Місць: {{ table.seats }}</p>
+        </div>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <label class="form-label">Дата</label>
+                {{ form.booking_date }}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Час</label>
+                {{ form.booking_time }}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Тривалість (хв)</label>
+                {{ form.duration_minutes }}
+            </div>
+        </div>
+
+        <h4 class="mb-3">Додати страви (опційно)</h4>
+        <div class="row g-3 mb-4">
+            {% for dish in dishes %}
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        {% if dish.photo %}
+                            <img src="{{ dish.photo.url }}" class="card-img-top" alt="{{ dish.name }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h6 class="card-title">{{ dish.name }}</h6>
+                            <p class="card-text">{{ dish.price }} грн</p>
+                            <label class="form-label">Кількість</label>
+                            <input type="number" name="dish_{{ dish.id }}" min="0" value="0" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Страв поки немає.</p>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.promo_code.id_for_label }}" class="form-label">
+                Промокод з гри (необов'язково)
+            </label>
+            {{ form.promo_code }}
+            {% if form.promo_code.errors %}
+                <div class="text-danger">{{ form.promo_code.errors|join:', ' }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg">Забронювати</button>
+    </form>
+{% endblock %}

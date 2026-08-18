@@ -1,0 +1,71 @@
+.lm-game-wrapper {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.lm-game-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(20, 18, 16, 0.75);
+    border-radius: var(--lm-radius);
+}
+
+#gameCanvas {
+    display: block;
+    max-width: 100%;
+    background: var(--lm-bg-elevated);
+    border: 1px solid var(--lm-line-strong);
+    border-radius: var(--lm-radius);
+}
+
+#scoreDisplay {
+    color: var(--lm-gold-bright);
+    font-family: var(--lm-font-mono);
+}
+
+/* --- Пороги нагород --- */
+.rewards-table {
+    background-color: var(--lm-bg-card);
+    border: 1px solid var(--lm-line-strong);
+    border-radius: var(--lm-radius);
+    overflow: hidden;
+}
+
+.reward-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 0.9rem 1.1rem;
+    border-bottom: 1px solid var(--lm-line);
+    background-color: transparent;
+}
+.reward-row:last-child {
+    border-bottom: none;
+}
+
+.reward-threshold {
+    color: var(--lm-gold);
+    font-family: var(--lm-font-mono);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    flex: 0 0 auto;
+}
+
+.reward-desc {
+    color: var(--lm-ivory);
+    flex: 1 1 auto;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.reward-cost {
+    color: var(--lm-muted-dim);
+    font-size: 0.78rem;
+    flex: 0 0 auto;
+    white-space: nowrap;
+}

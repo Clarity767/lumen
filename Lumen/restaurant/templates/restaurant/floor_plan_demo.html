@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumen — Схема залу</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --lm-bg:#141210; --lm-bg-elevated:#1c1916; --lm-bg-card:#1a1714;
+  --lm-line:rgba(201,168,106,.14); --lm-line-strong:rgba(201,168,106,.28);
+  --lm-ivory:#ECE6D9; --lm-muted:#948C7C; --lm-muted-dim:#6E6858;
+  --lm-gold:#C9A25D; --lm-gold-bright:#E3C07D; --lm-gold-dim:#8C7239;
+  --lm-ember:#A65B4A; --lm-sage:#7C9473;
+  --lm-font-display:'Cormorant Garamond',Georgia,serif;
+  --lm-font-body:'Jost',-apple-system,sans-serif;
+  --lm-font-mono:'JetBrains Mono',ui-monospace,monospace;
+  --lm-radius:2px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;background:var(--lm-bg);color:var(--lm-ivory);font-family:var(--lm-font-body);}
+body{
+  min-height:100vh;
+  background-image:
+    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(201,162,93,.05), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 20%, rgba(201,162,93,.035), transparent 55%);
+  padding:2.5rem 1.25rem 4rem;
+}
+.wrap{max-width:1140px;margin:0 auto;}
+h2{
+  font-family:var(--lm-font-display); font-weight:500; position:relative;
+  padding-bottom:.6rem; margin:0 0 .4rem;
+}
+h2::after{content:"";position:absolute;left:0;bottom:0;width:46px;height:1px;background:var(--lm-gold);}
+.sub{color:var(--lm-muted);font-size:.9rem;margin:0 0 1.75rem;max-width:520px;}
+
+.floor-shell{
+  position:relative;
+  display:grid; grid-template-columns:1fr 300px; gap:1.5rem;
+}
+@media (max-width:860px){ .floor-shell{grid-template-columns:1fr;} }
+
+.floor-stage{
+  background:var(--lm-bg-elevated);
+  border:1px solid var(--lm-line);
+  border-radius:var(--lm-radius);
+  padding:1rem;
+  position:relative;
+  overflow:hidden;
+}
+.floor-stage svg{display:block;width:100%;height:auto;}
+
+.zone-label{
+  font-family:var(--lm-font-body);
+  font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+  fill:var(--lm-muted-dim);
+}
+.zone-box{ fill:none; stroke:var(--lm-line); stroke-dasharray:3 4; }
+
+.seat-dot{ fill:var(--lm-muted-dim); opacity:.55; transition:opacity .2s ease; }
+.table-group{ cursor:pointer; }
+.table-shape{
+  fill:var(--lm-bg-card);
+  stroke:var(--lm-gold-dim);
+  stroke-width:1.4;
+  transition:stroke .2s ease, filter .2s ease, fill .2s ease;
+}
+.table-group:hover .table-shape{ stroke:var(--lm-gold-bright); filter:drop-shadow(0 0 6px rgba(201,162,93,.35)); }
+.table-group:hover .seat-dot{ opacity:.9; }
+.table-group.reserved .table-shape{ stroke:var(--lm-ember); }
+.table-group.reserved .seat-dot{ fill:var(--lm-ember); opacity:.5; }
+.table-group.selected .table-shape{
+  stroke:var(--lm-gold-bright); stroke-width:2;
+  filter:drop-shadow(0 0 12px rgba(227,192,125,.55));
+}
+.table-label{
+  font-family:var(--lm-font-mono); font-size:9px; fill:var(--lm-muted);
+  text-anchor:middle; pointer-events:none; letter-spacing:.02em;
+}
+.table-group:hover .table-label,
+.table-group.selected .table-label{ fill:var(--lm-ivory); }
+.table-group.reserved .table-label{ fill:var(--lm-muted-dim); }
+
+.tooltip{
+  position:absolute; pointer-events:none; z-index:5;
+  background:var(--lm-bg-card); border:1px solid var(--lm-line-strong);
+  border-radius:var(--lm-radius); padding:.4rem .65rem;
+  font-size:.72rem; color:var(--lm-ivory); white-space:nowrap;
+  opacity:0; transform:translate(-50%,-115%); transition:opacity .12s ease;
+}
+.tooltip.show{ opacity:1; }
+.tooltip b{ color:var(--lm-gold-bright); font-family:var(--lm-font-display); font-size:.85rem; font-weight:500; }
+
+.legend{
+  display:flex; gap:1.4rem; flex-wrap:wrap;
+  margin-top:1rem; padding-top:1rem; border-top:1px solid var(--lm-line);
+}
+.legend-item{ display:flex; align-items:center; gap:.45rem; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--lm-muted); }
+.legend-swatch{ width:11px; height:11px; border-radius:50%; border:1.4px solid var(--lm-gold-dim); background:var(--lm-bg-card); }
+.legend-swatch.reserved{ border-color:var(--lm-ember); }
+.legend-swatch.selected{ border-color:var(--lm-gold-bright); box-shadow:0 0 6px rgba(227,192,125,.6); }
+
+.panel{
+  background:var(--lm-bg-card); border:1px solid var(--lm-line);
+  border-radius:var(--lm-radius); padding:1.4rem;
+  height:fit-content;
+}
+.panel-empty{ color:var(--lm-muted); font-size:.85rem; }
+.panel-empty .hint{
+  display:block; margin-top:.6rem; font-size:.72rem; color:var(--lm-muted-dim);
+}
+.panel h3{
+  font-family:var(--lm-font-display); font-weight:500; font-style:italic;
+  color:var(--lm-gold-bright); font-size:1.5rem; margin:0 0 .2rem;
+}
+.panel .zone-tag{
+  font-size:.65rem; letter-spacing:.14em; text-transform:uppercase; color:var(--lm-muted); margin-bottom:1rem; display:block;
+}
+.panel-row{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:.55rem 0; border-bottom:1px solid var(--lm-line); font-size:.85rem;
+}
+.panel-row:last-of-type{ border-bottom:none; }
+.panel-row .k{ color:var(--lm-muted); }
+.panel-row .v{ font-family:var(--lm-font-mono); color:var(--lm-ivory); }
+.seats-row{ display:flex; gap:4px; margin-top:2px; }
+.seats-row span{ width:7px; height:7px; border-radius:50%; background:var(--lm-gold-dim); }
+
+.status-badge{
+  display:inline-block; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase;
+  padding:.35em .7em; border-radius:20px; margin-top:1rem;
+}
+.status-badge.free{ background:rgba(124,148,115,.16); color:var(--lm-sage); border:1px solid rgba(124,148,115,.4); }
+.status-badge.taken{ background:rgba(166,91,74,.18); color:#D28E7C; border:1px solid rgba(166,91,74,.45); }
+
+.btn{
+  display:inline-block; width:100%; text-align:center; margin-top:1.1rem;
+  font-family:var(--lm-font-body); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+  padding:.7rem 1rem; border-radius:var(--lm-radius); border:1px solid var(--lm-gold);
+  color:var(--lm-gold-bright); background:transparent; cursor:pointer; transition:all .25s ease;
+  text-decoration:none;
+}
+.btn:hover{ background:var(--lm-gold); border-color:var(--lm-gold); color:#141210; box-shadow:0 0 22px rgba(201,162,93,.35); }
+.btn.disabled{
+  border-color:var(--lm-line-strong); color:var(--lm-muted-dim); pointer-events:none;
+}
+
+@media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h2>Схема залу</h2>
+  <p class="sub">Оберіть столик на плані — розмір і кількість крапок навколо показують кількість місць. Золотий контур — вільно, теракотовий — заброньовано.</p>
+
+  <div class="floor-shell">
+    <div class="floor-stage">
+      <svg id="floorSvg" viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="planks" width="46" height="46" patternTransform="rotate(28)" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="46" stroke="rgba(201,168,106,0.05)" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect x="0" y="0" width="1000" height="640" fill="url(#planks)"/>
+
+        <!-- Zones -->
+        <rect class="zone-box" x="20" y="40" width="960" height="110" rx="2"/>
+        <text class="zone-label" x="30" y="32">Вікна</text>
+
+        <rect class="zone-box" x="20" y="170" width="140" height="260" rx="2"/>
+        <text class="zone-label" x="30" y="162">Бар</text>
+
+        <rect class="zone-box" x="180" y="170" width="640" height="260" rx="2"/>
+        <text class="zone-label" x="190" y="162">Основна зала</text>
+
+        <rect class="zone-box" x="840" y="170" width="140" height="150" rx="2"/>
+        <text class="zone-label" x="850" y="162">VIP</text>
+
+        <rect class="zone-box" x="20" y="460" width="960" height="150" rx="2"/>
+        <text class="zone-label" x="30" y="452">Тераса</text>
+
+        <g id="tables"></g>
+      </svg>
+      <div id="tooltip" class="tooltip"></div>
+
+      <div class="legend">
+        <div class="legend-item"><span class="legend-swatch"></span>Вільно</div>
+        <div class="legend-item"><span class="legend-swatch reserved"></span>Заброньовано</div>
+        <div class="legend-item"><span class="legend-swatch selected"></span>Обрано</div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel">
+      <div class="panel-empty">
+        Натисніть на столик на схемі, щоб побачити деталі та забронювати.
+        <span class="hint">Розмір позначки на плані відповідає кількості місць за столиком.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---- Mock data (shape mirrors the Table model: title, seats, price, zone, status) ----
+const TABLES = [
+  {id:1,  title:"Вікна 1",  seats:2, price:600,  zone:"Вікна",   x:110, y:95,  status:"free"},
+  {id:2,  title:"Вікна 2",  seats:2, price:600,  zone:"Вікна",   x:260, y:95,  status:"free"},
+  {id:3,  title:"Вікна 3",  seats:2, price:650,  zone:"Вікна",   x:410, y:95,  status:"taken"},
+  {id:4,  title:"Вікна 4",  seats:4, price:900,  zone:"Вікна",   x:580, y:95,  status:"free"},
+  {id:5,  title:"Вікна 5",  seats:4, price:900,  zone:"Вікна",   x:760, y:95,  status:"free"},
+  {id:6,  title:"Зала 1",   seats:4, price:850,  zone:"Основна зала", x:300, y:250, status:"free"},
+  {id:7,  title:"Зала 2",   seats:4, price:850,  zone:"Основна зала", x:460, y:250, status:"taken"},
+  {id:8,  title:"Зала 3",   seats:6, price:1300, zone:"Основна зала", x:640, y:250, status:"free"},
+  {id:9,  title:"Зала 4",   seats:4, price:850,  zone:"Основна зала", x:300, y:360, status:"free"},
+  {id:10, title:"Зала 5",   seats:6, price:1300, zone:"Основна зала", x:500, y:360, status:"free"},
+  {id:11, title:"VIP зала", seats:8, price:2200, zone:"VIP",     x:905, y:255, status:"taken"},
+  {id:12, title:"Тераса 1", seats:4, price:800,  zone:"Тераса",  x:250, y:530, status:"free"},
+  {id:13, title:"Тераса 2", seats:4, price:800,  zone:"Тераса",  x:450, y:530, status:"free"},
+  {id:14, title:"Тераса 3", seats:2, price:550,  zone:"Тераса",  x:650, y:530, status:"free"},
+];
+
+const RADIUS_BY_SEATS = s => s<=2 ? 18 : s<=4 ? 24 : s<=6 ? 29 : 35;
+
+const svgNS = "http://www.w3.org/2000/svg";
+const tablesG = document.getElementById('tables');
+const tooltip = document.getElementById('tooltip');
+const stage = document.querySelector('.floor-stage');
+const panel = document.getElementById('panel');
+let selectedId = null;
+
+function seatDots(cx, cy, ringR, count){
+  const g = document.createElementNS(svgNS,'g');
+  for(let i=0;i<count;i++){
+    const angle = (i / count) * Math.PI*2 - Math.PI/2;
+    const dx = cx + Math.cos(angle)*ringR;
+    const dy = cy + Math.sin(angle)*ringR;
+    const dot = document.createElementNS(svgNS,'circle');
+    dot.setAttribute('class','seat-dot');
+    dot.setAttribute('cx', dx); dot.setAttribute('cy', dy); dot.setAttribute('r', 3.4);
+    g.appendChild(dot);
+  }
+  return g;
+}
+
+function renderTables(){
+  tablesG.innerHTML = '';
+  TABLES.forEach(t => {
+    const r = RADIUS_BY_SEATS(t.seats);
+    const g = document.createElementNS(svgNS,'g');
+    g.setAttribute('class', 'table-group' + (t.status==='taken' ? ' reserved' : '') + (t.id===selectedId ? ' selected' : ''));
+    g.setAttribute('tabindex','0');
+    g.setAttribute('role','button');
+    g.setAttribute('aria-label', `${t.title}, ${t.seats} місць, ${t.status==='taken'?'заброньовано':'вільно'}`);
+
+    const shape = document.createElementNS(svgNS, t.seats>=6 ? 'rect' : 'circle');
+    if (t.seats>=6){
+      shape.setAttribute('x', t.x-r); shape.setAttribute('y', t.y-r*0.72);
+      shape.setAttribute('width', r*2); shape.setAttribute('height', r*1.44);
+      shape.setAttribute('rx', 6);
+    } else {
+      shape.setAttribute('cx', t.x); shape.setAttribute('cy', t.y); shape.setAttribute('r', r);
+    }
+    shape.setAttribute('class','table-shape');
+    g.appendChild(shape);
+    g.appendChild(seatDots(t.x, t.y, r+13, t.seats));
+
+    const label = document.createElementNS(svgNS,'text');
+    label.setAttribute('class','table-label');
+    label.setAttribute('x', t.x); label.setAttribute('y', t.y+3);
+    label.textContent = t.seats;
+    g.appendChild(label);
+
+    g.addEventListener('mouseenter', e => showTooltip(t, e));
+    g.addEventListener('mousemove', e => positionTooltip(e));
+    g.addEventListener('mouseleave', hideTooltip);
+    g.addEventListener('click', () => selectTable(t.id));
+    g.addEventListener('keydown', e => { if(e.key==='Enter' || e.key===' '){ e.preventDefault(); selectTable(t.id); }});
+
+    tablesG.appendChild(g);
+  });
+}
+
+function showTooltip(t, evt){
+  tooltip.innerHTML = `<b>${t.title}</b><br>${t.seats} місць · ${t.status==='taken'?'заброньовано':'вільно'}`;
+  tooltip.classList.add('show');
+  positionTooltip(evt);
+}
+function positionTooltip(evt){
+  const rect = stage.getBoundingClientRect();
+  tooltip.style.left = (evt.clientX - rect.left) + 'px';
+  tooltip.style.top = (evt.clientY - rect.top) + 'px';
+}
+function hideTooltip(){ tooltip.classList.remove('show'); }
+
+function selectTable(id){
+  selectedId = id;
+  renderTables();
+  const t = TABLES.find(x => x.id===id);
+  const free = t.status !== 'taken';
+  panel.innerHTML = `
+    <h3>${t.title}</h3>
+    <span class="zone-tag">${t.zone}</span>
+    <div class="panel-row">
+      <span class="k">Місць</span>
+      <div>
+        <span class="v">${t.seats}</span>
+        <div class="seats-row">${'<span></span>'.repeat(t.seats)}</div>
+      </div>
+    </div>
+    <div class="panel-row">
+      <span class="k">Ціна</span>
+      <span class="v">${t.price} грн</span>
+    </div>
+    <span class="status-badge ${free ? 'free' : 'taken'}">${free ? 'Вільно' : 'Заброньовано'}</span>
+    ${free
+      ? `<a class="btn" href="#" onclick="alert('У проєкті: перехід на /booking/${t.id}/'); return false;">Забронювати</a>`
+      : `<a class="btn disabled" href="#" onclick="return false;">Недоступно</a>`}
+  `;
+}
+
+renderTables();
+</script>
+</body>
+</html>

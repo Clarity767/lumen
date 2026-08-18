@@ -1,0 +1,93 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+{% block extra_css %}
+<link href="{% static 'restaurant/css/profile.css' %}" rel="stylesheet">
+{% endblock %}
+{% block title %}Особистий кабінет{% endblock %}
+{% block content %}
+<h2 class="mb-4">Особистий кабінет</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start">
+            <div>
+                <h5 class="card-title">{{ user.username }}</h5>
+                <p class="card-text">Email: {{ user.email }}</p>
+                {% if user.profile.phone %}
+                <p class="card-text">Телефон: {{ user.profile.phone }}</p>
+                {% endif %}
+                {% if user.profile.bio %}
+                <p class="card-text">{{ user.profile.bio }}</p>
+                {% endif %}
+            </div>
+            {% if user.profile.avatar %}
+            <img src="{{ user.profile.avatar.url }}" class="rounded-circle" width="80" height="80"
+                style="object-fit: cover;">
+            {% endif %}
+        </div>
+        <a href="{% url 'profile_edit' %}" class="btn btn-sm btn-outline-primary mt-2">Редагувати профіль</a>
+    </div>
+</div>
+
+<h4 class="mb-3">Історія бронювань</h4>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Столик</th>
+                <th>Дата</th>
+                <th>Час</th>
+                <th>Статус</th>
+                <th>Сума</th>
+                <th>Приз</th>
+                <th>Дія</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.table.title }}</td>
+                <td>{{ booking.booking_date }}</td>
+                <td>{{ booking.booking_time }}</td>
+                <td>
+                    <span class="badge
+                                {% if booking.status == 'paid' %}bg-success
+                                {% elif booking.status == 'confirmed' %}bg-info text-dark
+                                {% elif booking.status == 'cancelled' %}bg-secondary
+                                {% else %}bg-warning text-dark{% endif %}">
+                        {{ booking.get_status_display }}
+                    </span>
+                </td>
+                <td>{{ booking.total_price }} грн</td>
+                <td>
+                    {% if booking.promo_code %}
+                        <span class="badge bg-success">
+                            🎁 {{ booking.promo_code.reward_description }}
+                        </span><br>
+                        <small class="text-muted">−{{ booking.promo_discount_applied }} грн</small>
+                    {% else %}
+                        <span class="text-muted">—</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if booking.status == 'pending' or booking.status == 'confirmed' %}
+                    <form method="post" action="{% url 'booking_cancel' booking.pk %}"
+                        onsubmit="return confirm('Скасувати це бронювання?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Скасувати</button>
+                    </form>
+                    {% endif %}
+                    {% if booking.status == 'pending' %}
+                    <a href="{% url 'payment' booking.pk %}" class="btn btn-sm btn-outline-primary mt-1">Оплатити</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center">У вас поки немає бронювань.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

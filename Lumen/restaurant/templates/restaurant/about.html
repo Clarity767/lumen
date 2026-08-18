@@ -1,0 +1,70 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+{% block extra_css %}
+<link href="{% static 'restaurant/css/about.css' %}" rel="stylesheet">
+{% endblock %}
+{% block title %}Про нас — Lumen{% endblock %}
+{% block meta_description %}Дізнайтеся більше про ресторан Lumen — нашу історію, філософію та як з нами зв'язатися.{% endblock %}
+{% block content %}
+    <div class="text-center py-5 lm-about-hero">
+        <h1 class="display-4">Про Lumen</h1>
+        <p class="lead">Місце, де вечеря стає подією.</p>
+    </div>
+
+    <div class="row align-items-center g-5 my-5">
+        <div class="col-md-6">
+            <h2 class="mb-3">Наша історія</h2>
+            <p>Lumen відкрився з простої ідеї — створити простір, де хороша кухня, тепла атмосфера та увага до деталей поєднуються без зайвої пишноти.</p>
+            <p>Наша команда шефів працює з сезонними та локальними продуктами, оновлюючи меню відповідно до пори року, щоб кожна страва була свіжою та актуальною.</p>
+        </div>
+        <div class="col-md-6">
+            <div class="card lm-seasonal-card">
+                <div class="card-body">
+                    <h3 class="mt-2">Наша філософія</h3>
+                    <p class="card-text">Ми віримо, що ресторан — це не лише їжа, а простір для спілкування, святкування та відпочинку. Тому ми приділяємо увагу кожній деталі: від сервісу до атмосфери залу.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row text-center lm-stats my-5 py-4">
+        <div class="col-6 col-md-3">
+            <div class="lm-stat-number">2020</div>
+            <div class="lm-stat-label">Рік заснування</div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="lm-stat-number">12</div>
+            <div class="lm-stat-label">Шеф-кухарів</div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="lm-stat-number">15+</div>
+            <div class="lm-stat-label">Столиків</div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="lm-stat-number">7/7</div>
+            <div class="lm-stat-label">Дні на тиждень</div>
+        </div>
+    </div>
+
+    <div class="row g-5 my-5">
+        <div class="col-md-6">
+            <h2 class="mb-3">Контакти</h2>
+            <div class="lm-contact-item"><strong>Адреса</strong><span>м. Дніпро, вул. Прикладна, 12</span></div>
+            <div class="lm-contact-item"><strong>Телефон</strong><span>+380 (00) 000-00-00</span></div>
+            <div class="lm-contact-item"><strong>Email</strong><span>info@lumen.local</span></div>
+            <div class="lm-contact-item"><strong>Графік</strong><span>щодня з 11:00 до 23:00</span></div>
+        </div>
+        <div class="col-md-6">
+            <h2 class="mb-3">Зв'язатися з нами</h2>
+            {% if form %}
+                <form method="post" class="lm-contact-form">
+                    {% csrf_token %}
+                    <div class="mb-3">{{ form.name }}</div>
+                    <div class="mb-3">{{ form.email }}</div>
+                    <div class="mb-3">{{ form.message }}</div>
+                    <button type="submit" class="btn btn-primary">Надіслати</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,9 @@
+
+h2.text-success {
+    color: var(--lm-sage) !important;
+}
+
+p strong {
+    font-family: var(--lm-font-mono);
+    color: var(--lm-gold);
+}

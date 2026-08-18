@@ -1,0 +1,24 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+{% block extra_css %}
+<link href="{% static 'restaurant/css/payment.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Оплата бронювання</h2>
+    <div class="card p-4 mt-3" style="max-width: 500px;">
+        <p><strong>Столик:</strong> {{ booking.table.title }}</p>
+        <p><strong>Дата:</strong> {{ booking.booking_date }} о {{ booking.booking_time }}</p>
+        <p><strong>Сума до оплати:</strong> {{ payment.amount }} грн</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <p class="text-muted small">Це імітація оплати — реальні платіжні дані не потрібні.</p>
+            <input type="text" class="form-control mb-2" placeholder="Номер картки (будь-який)" maxlength="19">
+            <input type="text" class="form-control mb-3" placeholder="MM/YY  CVV" maxlength="8">
+            <button type="submit" class="btn btn-success w-100">Оплатити {{ payment.amount }} грн</button>
+        </form>
+        
+    </div>
+</div>
+{% endblock %}

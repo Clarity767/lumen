@@ -1,0 +1,40 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+{% block extra_css %}
+<link href="{% static 'restaurant/css/admin_chat_thread.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <a href="{% url 'admin_chat_list' %}" class="btn btn-sm btn-outline-secondary mb-3">&larr; До списку чатів</a>
+    <h2>Чат з {{ client.username }}</h2>
+
+    <div id="chat-box"
+         class="border rounded p-3 mb-3"
+         style="height: 400px; overflow-y: auto;"
+         data-poll-url="{% url 'admin_chat_poll' client.id %}">
+        {% for msg in chat_messages %}
+            <div class="mb-2 {% if msg.sender == request.user %}text-end{% endif %}">
+                <span class="badge {% if msg.sender == request.user %}bg-primary{% else %}bg-secondary{% endif %}">
+                    {{ msg.sender.username }}
+                </span>
+                <div>{{ msg.text }}</div>
+                <small class="text-muted">{{ msg.created_at|date:"d.m H:i" }}</small>
+            </div>
+        {% empty %}
+            <p class="text-muted">Повідомлень з цим клієнтом поки немає.</p>
+        {% endfor %}
+    </div>
+
+    <form method="post" action="{% url 'admin_chat_thread' client.id %}">
+        {% csrf_token %}
+        <div class="input-group">
+            <input type="text" name="text" class="form-control" placeholder="Відповідь клієнту..." required>
+            <button type="submit" class="btn btn-primary">Надіслати</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'restaurant/js/chat.js' %}"></script>
+{% endblock %}

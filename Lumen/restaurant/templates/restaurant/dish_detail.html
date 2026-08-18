@@ -1,0 +1,64 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+{% load restaurant_extras %}
+{% block title %}{{ dish.name }}{% endblock %}
+{% block extra_css %}
+<link href="{% static 'restaurant/css/dish_detail.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        {% if dish.photo %}
+        <img src="{{ dish.photo.url }}" class="img-fluid rounded" alt="{{ dish.name }}">
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+        <h2>{{ dish.name }}</h2>
+        <p>{{ dish.description }}</p>
+        <p class="fs-4"><strong>{{ dish.price }} грн</strong></p>
+        {% if avg_rating %}
+        <p>Рейтинг: <strong>{{ avg_rating|floatformat:1 }}</strong> ★ ({{ reviews.count }} {{ reviews.count|uk_plural:"відгук,відгуки,відгуків" }})</p>
+        {% else %}
+        <p class="text-muted">Ще немає відгуків</p>
+        {% endif %}
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h4 class="mb-3">{% if user_review %}Редагувати ваш відгук{% else %}Залишити відгук{% endif %}</h4>
+
+{% if user.is_authenticated %}
+<form method="post" class="mb-4 lm-review-form" style="max-width: 500px;">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label class="form-label">Оцінка</label>
+        {{ form.rating }}
+    </div>
+    <div class="mb-3">
+        {{ form.text }}
+    </div>
+    <button type="submit" class="btn btn-primary">{% if user_review %}Оновити{% else %}Надіслати{% endif %}</button>
+</form>
+{% else %}
+<p><a href="{% url 'login' %}">Увійдіть</a>, щоб залишити відгук.</p>
+{% endif %}
+
+<h4 class="mb-3">Відгуки</h4>
+{% for review in reviews %}
+{% if avg_rating %}
+        <div class="card mb-2 lm-review-item">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <strong>{{ review.user.username }}</strong>
+                    <p>Рейтинг: <strong>{{ avg_rating|floatformat:1 }}</strong> ★ ({{ reviews.count }} відгук{{ reviews.count|pluralize:"ів" }})</p>
+                </div>
+                {% if review.text %}<p class="mb-1 mt-2">{{ review.text }}</p>{% endif %}
+                <small class="text-muted">{{ review.created_at|date:"d.m.Y H:i" }}</small>
+            </div>
+        </div>
+    {% else %}
+        <p class="text-muted">Поки що немає відгуків. Будьте першим!</p>
+    {% endif %}
+    {% endfor %}
+{% endblock %}

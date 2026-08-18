@@ -1,0 +1,90 @@
+.profile-edit-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.profile-edit-avatar-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #f0f0f0;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.profile-edit-avatar-placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #f1f3f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: #adb5bd;
+    margin-bottom: 1.5rem;
+}
+
+.profile-edit-title {
+    font-weight: 600;
+    margin-bottom: 1.75rem;
+    color: #212529;
+}
+
+.profile-edit-form .form-label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #495057;
+    margin-bottom: 0.4rem;
+}
+
+.profile-edit-form .form-control {
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    padding: 0.65rem 0.9rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-edit-form .form-control:focus {
+    border-color: #C9A86A;
+    box-shadow: 0 0 0 0.2rem rgba(201, 168, 106, 0.15);
+}
+
+.profile-edit-form textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.profile-edit-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.profile-edit-actions .btn-primary {
+    background: #C9A86A;
+    border-color: #C9A86A;
+    padding: 0.6rem 1.8rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.profile-edit-actions .btn-primary:hover {
+    background: #b5924f;
+    border-color: #b5924f;
+}
+
+.profile-edit-actions .btn-outline-secondary {
+    border-radius: 8px;
+    padding: 0.6rem 1.8rem;
+}
+
+@media (max-width: 576px) {
+    .profile-edit-card {
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+}

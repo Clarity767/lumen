@@ -1,0 +1,93 @@
+/* about.css — for about.html */
+
+.lm-about-hero h1.display-4 {
+    font-style: italic;
+    color: var(--lm-gold-bright);
+    text-shadow: 0 0 40px rgba(201, 162, 93, 0.25);
+}
+
+.lm-about-hero p.lead {
+    color: var(--lm-muted);
+    font-weight: 300;
+}
+
+/* Contact block */
+.lm-contact-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.9rem;
+    font-size: 0.95rem;
+}
+.lm-contact-item strong {
+    color: var(--lm-gold);
+    font-weight: 500;
+    min-width: 100px;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+.lm-contact-item span {
+    color: var(--lm-ivory);
+}
+
+/* Contact form */
+.lm-contact-form .form-control {
+    background: var(--lm-bg-card);
+    border: 1px solid var(--lm-line);
+    color: var(--lm-ivory);
+    border-radius: var(--lm-radius);
+    padding: 0.7rem 1rem;
+    font-family: var(--lm-font-body);
+    font-size: 0.9rem;
+}
+.lm-contact-form .form-control::placeholder {
+    color: var(--lm-muted-dim);
+}
+.lm-contact-form .form-control:focus {
+    background: var(--lm-bg-card);
+    border-color: var(--lm-gold);
+    color: var(--lm-ivory);
+    box-shadow: 0 0 0 0.15rem rgba(201, 162, 93, 0.15);
+}
+.lm-contact-form textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Seasonal-style card (reused for "Наша філософія") */
+.lm-seasonal-card {
+    background: var(--lm-bg-card);
+    border: 1px solid var(--lm-line);
+    border-radius: var(--lm-radius);
+    padding: 1rem;
+}
+.lm-seasonal-card .card-title,
+.lm-seasonal-card h3 {
+    font-family: var(--lm-font-display);
+    color: var(--lm-gold-bright);
+}
+.lm-seasonal-card .card-text {
+    color: var(--lm-muted);
+}
+
+
+/* Stats bar (reused from home) */
+.lm-stats {
+    border-top: 1px solid var(--lm-line);
+    border-bottom: 1px solid var(--lm-line);
+}
+.lm-stat-number {
+    font-family: var(--lm-font-display);
+    font-style: italic;
+    font-size: 2.2rem;
+    color: var(--lm-gold-bright);
+    line-height: 1.2;
+}
+.lm-stat-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--lm-muted);
+    margin-top: 0.3rem;
+}

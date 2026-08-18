@@ -1,0 +1,68 @@
+/* table_detail.css — existing styles + mini floor-plan locator */
+
+.img-fluid.rounded {
+    border-radius: var(--lm-radius) !important;
+    border: 1px solid var(--lm-line);
+    filter: saturate(0.92) brightness(0.94);
+}
+
+p.fs-4 strong {
+    font-family: var(--lm-font-mono);
+    color: var(--lm-gold);
+    font-size: 1.1em;
+}
+
+/* ---------- Mini floor-plan locator ---------- */
+.locator {
+    background: var(--lm-bg-elevated);
+    border: 1px solid var(--lm-line);
+    border-radius: var(--lm-radius);
+    padding: 1rem 1rem 0.85rem;
+}
+.locator-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lm-muted);
+    margin-bottom: 0.6rem;
+}
+#locatorSvg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 220px;
+}
+
+.locator-dot {
+    fill: var(--lm-bg-card);
+    stroke: var(--lm-gold-dim);
+    stroke-width: 1.2;
+}
+.locator-table.current .locator-dot {
+    fill: var(--lm-gold-bright);
+    stroke: var(--lm-gold-bright);
+}
+.locator-here {
+    font-family: var(--lm-font-body);
+    font-size: 5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    fill: var(--lm-gold-bright);
+}
+.locator-pulse {
+    fill: none;
+    stroke: var(--lm-gold-bright);
+    stroke-width: 1;
+    opacity: 0.6;
+    animation: locator-pulse 2.2s ease-out infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+@keyframes locator-pulse {
+    0%   { transform: scale(1);   opacity: 0.6; }
+    100% { transform: scale(2.4); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .locator-pulse { animation: none; opacity: 0.35; }
+}

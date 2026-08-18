@@ -1,0 +1,46 @@
+/* dish_detail.css — for dish_detail.html */
+
+.lm-review-form .form-select,
+.lm-review-form .form-control {
+    background: var(--lm-bg-card);
+    border: 1px solid var(--lm-line);
+    color: var(--lm-ivory);
+    border-radius: var(--lm-radius);
+    padding: 0.7rem 1rem;
+    font-family: var(--lm-font-body);
+    font-size: 0.9rem;
+}
+
+.lm-review-form .form-control::placeholder {
+    color: var(--lm-muted-dim);
+}
+.lm-review-form .form-select:focus,
+.lm-review-form .form-control:focus {
+    background-color: var(--lm-bg-card);
+    border-color: var(--lm-gold);
+    color: var(--lm-ivory);
+    box-shadow: 0 0 0 0.15rem rgba(201, 162, 93, 0.15);
+}
+.lm-review-form .form-select option {
+    background: var(--lm-bg-card);
+    color: var(--lm-ivory);
+}
+.lm-review-form textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Review cards */
+.lm-review-item {
+    background: var(--lm-bg-card);
+    border: 1px solid var(--lm-line);
+    border-radius: var(--lm-radius);
+}
+.lm-review-item .card-body strong {
+    color: var(--lm-gold-bright);
+    font-family: var(--lm-font-display);
+    font-size: 1.05rem;
+}
+.lm-review-item small {
+    color: var(--lm-muted-dim) !important;
+}

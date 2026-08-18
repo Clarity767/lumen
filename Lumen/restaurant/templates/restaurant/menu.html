@@ -1,0 +1,36 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+{% block title %}Меню{% endblock %}
+{% block extra_css %}
+<link href="{% static 'restaurant/css/menu.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <h2 class="mb-4">Електронне меню</h2>
+
+    <div class="mb-4">
+        <a href="{% url 'menu' %}" class="btn btn-sm {% if not selected_category %}btn-primary{% else %}btn-outline-primary{% endif %}">Всі</a>
+        {% for cat in categories %}
+            <a href="?category={{ cat.slug }}" class="btn btn-sm {% if selected_category == cat.slug %}btn-primary{% else %}btn-outline-primary{% endif %}">{{ cat.name }}</a>
+        {% endfor %}
+    </div>
+
+    <div class="row g-4">
+        {% for dish in dishes %}
+            <div class="col-md-4">
+                <div class="card h-100">
+                    {% if dish.photo %}
+                        <img src="{{ dish.photo.url }}" class="card-img-top" alt="{{ dish.name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ dish.name }}</h5>
+                        <p class="card-text">{{ dish.description }}</p>
+                        <p class="card-text"><strong>{{ dish.price }} грн</strong></p>
+                        <a href="{% url 'dish_detail' dish.pk %}" class="btn btn-outline-primary">Детальніше та відгуки</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>У цій категорії страв поки немає.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

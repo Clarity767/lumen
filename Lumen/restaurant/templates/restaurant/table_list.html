@@ -1,0 +1,83 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+{% block extra_css %}
+<link href="{% static 'restaurant/css/table_list.css' %}" rel="stylesheet">
+{% endblock %}
+{% block title %}Столики{% endblock %}
+{% block content %}
+    <h2 class="mb-1">Каталог столиків</h2>
+    <p class="lm-sub mb-3">Оберіть столик на схемі залу або перегляньте список.</p>
+
+    <div class="lm-view-tabs mb-4">
+        <button type="button" class="lm-view-tab active" data-view="floor">Схема залу</button>
+        <button type="button" class="lm-view-tab" data-view="list">Список</button>
+    </div>
+
+    {# ---------- Floor plan view ---------- #}
+    <div id="floorView" class="lm-view">
+        <div class="floor-shell">
+            <div class="floor-stage">
+                <svg id="floorSvg" viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="planks" width="46" height="46" patternTransform="rotate(28)" patternUnits="userSpaceOnUse">
+                            <line x1="0" y1="0" x2="0" y2="46" stroke="rgba(201,168,106,0.05)" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <rect x="0" y="0" width="1000" height="640" fill="url(#planks)"/>
+                    <g id="tables"></g>
+                </svg>
+                <div id="tooltip" class="tooltip"></div>
+
+                <div class="legend">
+                    <div class="legend-item"><span class="legend-swatch"></span>Вільно</div>
+                    <div class="legend-item"><span class="legend-swatch reserved"></span>Заброньовано</div>
+                    <div class="legend-item"><span class="legend-swatch selected"></span>Обрано</div>
+                </div>
+            </div>
+
+            <div class="panel" id="floorPanel">
+                <div class="panel-empty">
+                    Натисніть на столик на схемі, щоб побачити деталі та забронювати.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# ---------- Original card/list view (kept as fallback + for users who prefer it) ---------- #}
+    <div id="listView" class="lm-view" style="display:none;">
+        <div class="mb-4">
+            <a href="{% url 'table_list' %}" class="btn btn-sm {% if not selected_category %}btn-primary{% else %}btn-outline-primary{% endif %}">Всі</a>
+            {% for cat in categories %}
+                <a href="?category={{ cat.slug }}" class="btn btn-sm {% if selected_category == cat.slug %}btn-primary{% else %}btn-outline-primary{% endif %}">{{ cat.name }}</a>
+            {% endfor %}
+        </div>
+
+        <div class="row g-4">
+            {% for table in tables %}
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        {% if table.image %}
+                            <img src="{{ table.image.url }}" class="card-img-top" alt="{{ table.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ table.title }}</h5>
+                            <p class="card-text">Місць: {{ table.seats }}</p>
+                            <p class="card-text"><strong>{{ table.price }} грн</strong></p>
+                            <a href="{% url 'table_detail' table.pk %}" class="btn btn-outline-primary">Детальніше</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Столиків поки немає.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    {# Data for the floor plan: view must pass `floorplan_data` — see integration notes #}
+    {{ floorplan_data|json_script:"floorplan-data" }}
+    <span id="table-detail-url-template" data-template="{% url 'table_detail' 999999 %}" style="display:none"></span>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'restaurant/js/table_floorplan.js' %}"></script>
+{% endblock %}

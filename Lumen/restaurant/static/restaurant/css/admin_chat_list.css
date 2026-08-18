@@ -1,0 +1,14 @@
+
+
+.list-group-item {
+    background: var(--lm-bg-card);
+    border-color: var(--lm-line);
+    color: var(--lm-ivory);
+    padding: 1rem 1.25rem;
+}
+.list-group-item a {
+    color: var(--lm-ivory);
+    font-family: var(--lm-font-display);
+    font-size: 1.1rem;
+}
+.list-group-item a:hover { color: var(--lm-gold-bright); }

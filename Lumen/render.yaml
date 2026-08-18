@@ -1,13 +1,9 @@
-# Цей файл дозволяє Render автоматично налаштувати все одразу,
-# коли ви підключите GitHub-репозиторій (Render сам його знайде).
-# Замініть "authproject" на назву вашої папки з settings.py, якщо вона інша.
-
 services:
   - type: web
     name: myportal
     env: python
     buildCommand: "./build.sh"
-    startCommand: "gunicorn authproject.wsgi:application"
+    startCommand: "gunicorn Lumen.wsgi:application"
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9
